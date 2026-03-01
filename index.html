@@ -81,11 +81,21 @@
 
         <input type="text" name="college" placeholder="Enter Your College Name" required>
 
-        <select name="event" required>
+        <select name="event" id="event select" required onchnge=showRules()>
             <option value="">Select Event</option>
+        <optgroup label="✈️ Technical Events">
             <option value="Paper Presentation">Paper Presentation</option>
-            <option value="Project Expo">Project Expo</option>
-            <option value="Quiz">Quiz</option>
+            <option value="fixedwing">fixedwing</option>
+            <option value="dronecoding">dronecoding</option>
+            <option value="rocetry">rocetry</option>
+        </optgroup>
+
+        </optgroup label="🎉 Non-Technical Events">
+            <option value="glider challenge">glider challenge</option>
+            <option value="visual puzzle">visual puzzle</option>
+            <option value="aeroquiz">aeroquiz</option>
+            <option value="freefire">freefire</option>
+        </optgroup>
         </select>
 
         <button type="submit">Register Now</button>
