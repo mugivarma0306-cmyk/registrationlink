@@ -1,0 +1,99 @@
+/* General Body Styling */
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    color: white;
+    text-align: center;
+}
+
+/* Header Section */
+header {
+    padding: 50px 20px;
+}
+
+header h1 {
+    font-size: 42px;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+}
+
+header p {
+    font-size: 18px;
+    opacity: 0.9;
+}
+
+/* Form Container */
+.container {
+    background: white;
+    color: black;
+    width: 90%;
+    max-width: 420px;
+    margin: auto;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    transition: 0.3s ease-in-out;
+}
+
+.container:hover {
+    transform: scale(1.02);
+}
+
+/* Form Heading */
+.container h2 {
+    margin-bottom: 20px;
+}
+
+/* Input Fields */
+input, select {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+}
+
+/* Focus Effect */
+input:focus, select:focus {
+    border-color: #2c5364;
+    outline: none;
+    box-shadow: 0 0 5px #2c5364;
+}
+
+/* Button Styling */
+button {
+    background: #2c5364;
+    color: white;
+    padding: 12px;
+    width: 100%;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: #203a43;
+}
+
+/* Footer */
+footer {
+    margin-top: 30px;
+    padding: 15px;
+    font-size: 14px;
+    opacity: 0.8;
+}
+
+/* Mobile Responsive */
+@media (max-width: 500px) {
+    header h1 {
+        font-size: 28px;
+    }
+
+    .container {
+        padding: 20px;
+    }
+}
