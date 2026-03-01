@@ -34,7 +34,7 @@ body {
 }
 
 .btn:hover {
-    background: white;
+    background: #9d4edd;
 }
 
 /* Events Section */
@@ -99,7 +99,7 @@ button {
 }
 
 button:hover {
-    background: white;
+    background: #9d4edd;
 }
 
 /* Footer */
@@ -109,7 +109,7 @@ footer {
 }
 /* Event Rules Style */
 details {
-    background: white;
+    background: #9d4edd;
     border: 1px solid #e0c3fc;
     padding: 15px;
     border-radius: 15px;
@@ -125,5 +125,5 @@ summary {
 details p {
     margin-top: 10px;
     font-size: 14px;
-    color: white;
+    color: #9d4edd;
 }
