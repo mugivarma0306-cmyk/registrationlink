@@ -16,7 +16,7 @@ body {
 
 .hero h1 {
     font-size: 48px;
-    color: white;
+    color: #9d4edd;
 }
 
 .hero p {
@@ -93,7 +93,7 @@ button {
     color: white;
     padding: 15px;
     width: 100%;
-    border-solid #9d4edd: 1px;
+    border-solid #e0c3fc: 1px;
     border: none;
     font-weight: bold;
 }
