@@ -43,7 +43,7 @@ body {
 }
 
 .events h2 {
-    color: #4da6ff;
+    color: #9d4edd;
     margin-top: 40px;
 }
 
@@ -64,7 +64,7 @@ body {
 }
 
 .event-box div:hover {
-    background: #4da6ff;
+    background: #9d4edd;
     color: #9d4edd;
     transform: scale(1.05);
 }
