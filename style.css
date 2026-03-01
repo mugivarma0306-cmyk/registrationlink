@@ -90,7 +90,7 @@ input, select {
 
 button {
     background: rgba(255,255,255,0.05);
-    color: #9d4edd;
+    color: white;
     padding: 15px;
     width: 100%;
     border-solid #9d4edd: 1px;
