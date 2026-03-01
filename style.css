@@ -65,7 +65,7 @@ body {
 
 .event-box div:hover {
     background: #9d4edd;
-    color: #9d4edd;
+    color: white;
     transform: scale(1.05);
 }
 
