@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Aero Symposium 2K26</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+            color: white;
+            text-align: center;
+        }
+
+        header {
+            padding: 40px 20px;
+        }
+
+        h1 {
+            font-size: 40px;
+        }
+
+        .container {
+            background: white;
+            color: black;
+            width: 90%;
+            max-width: 400px;
+            margin: auto;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid gray;
+        }
+
+        button {
+            background: #2c5364;
+            color: white;
+            padding: 10px;
+            width: 100%;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #203a43;
+        }
+
+        footer {
+            margin-top: 30px;
+            padding: 10px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>AERO SYMPOSIUM 2K26</h1>
+    <p>Organized by Department of Aeronautical Engineering</p>
+</header>
+
+<div class="container">
+    <h2>Registration Form</h2>
+
+    <!-- 🔥 Replace YOUR_FORM_ID with your Formspree ID -->
+    <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+
+        <input type="text" name="name" placeholder="Enter Your Name" required>
+
+        <input type="email" name="email" placeholder="Enter Your Email" required>
+
+        <input type="text" name="college" placeholder="Enter Your College Name" required>
+
+        <select name="event" required>
+            <option value="">Select Event</option>
+            <option value="Paper Presentation">Paper Presentation</option>
+            <option value="Project Expo">Project Expo</option>
+            <option value="Quiz">Quiz</option>
+        </select>
+
+        <button type="submit">Register Now</button>
+
+    </form>
+</div>
+
+<footer>
+    © 2026 Aero Symposium | Designed by Mukesh
+</footer>
+
+</body>
+</html>
