@@ -3,86 +3,48 @@
 <head>
     <title>Aero Symposium 2K26</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="stylesheet" href="style.css">
 
-    <head>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
-            color: white;
-            text-align: center;
-        }
-
-        header {
-            padding: 40px 20px;
-        }
-
-        h1 {
-            font-size: 40px;
-        }
-
-        .container {
-            background: white;
-            color: black;
-            width: 90%;
-            max-width: 400px;
-            margin: auto;
-            padding: 20px;
-            border-radius: 10px;
-        }
-
-        input, select {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            border-radius: 5px;
-            border: 1px solid gray;
-        }
-
-        button {
-            background: #2c5364;
-            color: white;
-            padding: 10px;
-            width: 100%;
-            border: none;
-            border-radius: 5px;
-            font-size: 16px;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background: #203a43;
-        }
-
-        footer {
-            margin-top: 30px;
-            padding: 10px;
-            font-size: 14px;
-        }
-    </head>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
-<header>
-    <h1>AERO SYMPOSIUM 2K26</h1>
-    <p>Organized by Department of Aeronautical Engineering</p>
-</header>
+    <header class="hero">
+        <h1>AERO SYMPOSIUM 2K26</h1>
+        <p>Department of Aeronautical Engineering</p>
+        <a href="#register" class="btn">Register Now</a>
+    </header>
 
-<div class="container">
-    <h2>Registration Form</h2>
+    <section class="events">
+        <h2>✈️ Technical Events</h2>
+        <div class="event-box">
+            <div>Paper Presentation</div>
+            <div>Project Expo</div>
+            <div>Drone Racing</div>
+            <div>CAD Design Challenge</div>
+        </div>
 
-    <!-- 🔥 Replace YOUR_FORM_ID with your Formspree ID -->
-    <form action="https://formspree.io/f/xzdaklod" method="POST">
+        <h2>🎉 Non-Technical Events</h2>
+        <div class="event-box">
+            <div>Treasure Hunt</div>
+            <div>Photography</div>
+            <div>Gaming Tournament</div>
+            <div>Fun Quiz</div>
+        </div>
+    </section>
 
-        <input type="text" name="name" placeholder="Enter Your Name" required>
+    <section id="register" class="form-section">
+        <h2>Register Now</h2>
 
-        <input type="email" name="email" placeholder="Enter Your Email" required>
+        <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+            <input type="text" name="name" placeholder="Your Name" required>
+            <input type="email" name="email" placeholder="Your Email" required>
+            <input type="text" name="college" placeholder="College Name" required>
 
-        <input type="text" name="college" placeholder="Enter Your College Name" required>
-
-        <select name="event" id="event select" required onchnge=showRules()>
-            <option value="">Select Event</option>
+            <select name="event" required>
+               <option value="">Select Event</option>
         <optgroup label="✈️ Technical Events">
             <option value="Paper Presentation">Paper Presentation</option>
             <option value="fixedwing">fixedwing</option>
@@ -96,16 +58,15 @@
             <option value="aeroquiz">aeroquiz</option>
             <option value="freefire">freefire</option>
         </optgroup>
-        </select>
+            </select>
 
-        <button type="submit">Register Now</button>
+            <button type="submit">Submit Registration</button>
+        </form>
+    </section>
 
-    </form>
-</div>
-
-<footer>
-    © 2026 Aero Symposium | Designed by Mukesh
-</footer>
+    <footer>
+        © 2026 Aero Symposium | Designed by Mukesh
+    </footer>
 
 </body>
 </html>
