@@ -1,8 +1,8 @@
 body {
     margin: 0;
     font-family: 'Segoe UI', sans-serif;
-    background: linear-gradient(135deg, #f8f9fa, #e0c3fc);
-    color: #333;
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    color: #e6f2ff;
     text-align: center;
 }
 /* Hero Section */
@@ -109,19 +109,21 @@ footer {
 }
 /* Event Rules Style */
 details {
-    background: #9d4edd;
-    border: 1px solid #e0c3fc;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid #4da6ff;
     padding: 15px;
-    border-radius: 15px;
+    border-radius: 10px;
     width: 250px;
     cursor: pointer;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    backdrop-filter: blur(5px);
 }
-
 summary {
     font-weight: bold;
-    color: #9d4edd;
+    color: #4da6ff;
+    font-size: 16px;
 }
+
+
 details p {
     margin-top: 10px;
     font-size: 14px;
