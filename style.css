@@ -16,7 +16,7 @@ body {
 
 .hero h1 {
     font-size: 48px;
-    color: white;
+    color: #9d4edd;
 }
 
 .hero p {
@@ -64,7 +64,7 @@ body {
 }
 
 .event-box div:hover {
-    background: #9d4edd;
+    background: white;
     color: white;
     transform: scale(1.05);
 }
