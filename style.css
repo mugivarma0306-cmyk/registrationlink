@@ -108,3 +108,24 @@ footer {
     padding: 20px;
     background: black;
 }
+/* Event Rules Style */
+details {
+    background: #1a1a1a;
+    border: 1px solid gold;
+    padding: 15px;
+    border-radius: 10px;
+    width: 250px;
+    cursor: pointer;
+}
+
+summary {
+    font-weight: bold;
+    color: gold;
+    font-size: 16px;
+}
+
+details p {
+    margin-top: 10px;
+    font-size: 14px;
+    color: white;
+}
