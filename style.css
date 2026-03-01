@@ -16,7 +16,7 @@ body {
 
 .hero h1 {
     font-size: 48px;
-    color: #8B0000;
+    color: #E63946;
 }
 
 .hero p {
@@ -26,7 +26,7 @@ body {
 
 .btn {
     background: rgba(255,255,255,0.05);
-    color: #8B0000;
+    color: #E63946;
     padding: 12px 25px;
     text-decoration: none;
     border-radius: 10px;
