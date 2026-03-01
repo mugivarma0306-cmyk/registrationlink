@@ -1,8 +1,8 @@
 body {
     margin: 0;
     font-family: 'Segoe UI', sans-serif;
-    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-    color: #e6f2ff;
+    background: linear-gradient(135deg, #f8f9fa, #e0c3fc);
+    color: #333;
     text-align: center;
 }
 /* Hero Section */
@@ -16,7 +16,7 @@ body {
 
 .hero h1 {
     font-size: 48px;
-    color: #4da6ff;
+    color: #9d4edd;
 }
 
 .hero p {
@@ -26,7 +26,7 @@ body {
 
 .btn {
     background: rgba(255,255,255,0.05);
-    color: #4da6ff;
+    color: #9d4edd;
     padding: 12px 25px;
     text-decoration: none;
     border-radius: 10px;
@@ -65,7 +65,7 @@ body {
 
 .event-box div:hover {
     background: #4da6ff;
-    color: black;
+    color: #9d4edd;
     transform: scale(1.05);
 }
 
@@ -90,10 +90,10 @@ input, select {
 
 button {
     background: rgba(255,255,255,0.05);
-    color: black;
+    color: #9d4edd;
     padding: 15px;
     width: 100%;
-    border-solid #4da6ff: 1px;
+    border-solid #9d4edd: 1px;
     border: none;
     font-weight: bold;
 }
@@ -109,19 +109,18 @@ footer {
 }
 /* Event Rules Style */
 details {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid #4da6ff;
+    background: white;
+    border: 1px solid #e0c3fc;
     padding: 15px;
-    border-radius: 10px;
+    border-radius: 15px;
     width: 250px;
     cursor: pointer;
-    backdrop-filter: blur(5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 }
 
 summary {
     font-weight: bold;
-    color: #4da6ff;
-    font-size: 16px;
+    color: #9d4edd;
 }
 details p {
     margin-top: 10px;
