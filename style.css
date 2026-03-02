@@ -4,36 +4,52 @@ body {
     min-height: 100vh;
     background: black;
     position: relative;
-    font-family: Arial, sans-serif; /* optional */
+    font-family: Arial, sans-serif;
+    overflow-x: hidden; /* prevent horizontal scroll */
 }
 
-/* ANIMATED NEON FLOW BACKGROUND */
+/* NEON FLOW BACKGROUND */
 body::before {
     content: "";
-    position: fixed;       /* stays behind when scrolling */
-    top: 0; 
-    left: 0;
-    width: 100%; 
-    height: 100%;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
     background: url("https://images.unsplash.com/photo-1603126856191-3e60df3ff1b8?fit=crop&w=1600&q=80") no-repeat center center;
     background-size: cover;
     filter: brightness(1.2) contrast(1.2);
-    z-index: -1;           /* behind all content */
+    z-index: -2;  /* behind everything */
     animation: neonFlow 60s linear infinite;
 }
 
-/* ANIMATION KEYFRAMES */
 @keyframes neonFlow {
     0% { background-position: 0 0; }
     50% { background-position: 1000px 500px; }
     100% { background-position: 0 0; }
 }
 
-/* OPTIONAL: Make sure sections take full screen */
+/* PARTICLES OVERLAY */
+body::after {
+    content: "";
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: radial-gradient(white 1px, transparent 1px);
+    background-size: 10px 10px;
+    opacity: 0.2;  /* subtle effect */
+    z-index: -1;    /* above neon, below content */
+    animation: particleMove 15s linear infinite;
+}
+
+@keyframes particleMove {
+    0% { background-position: 0 0; }
+    100% { background-position: 0 1000px; }
+}
+
+/* OPTIONAL: Sections above background */
 section {
     min-height: 100vh;
     position: relative;
-    z-index: 0;  /* above the background */
+    z-index: 0;
 }
 /* Hero Section */
 .hero {
