@@ -9,16 +9,17 @@ body::before {
     position: fixed;
     top: 0; left: 0;
     width: 100%; height: 100%;
-    background: url("https://images.unsplash.com/photo-1470770841072-f978cf4d019e?fit=crop&w=1600&q=80") no-repeat center center;
+    background: url("https://images.unsplash.com/photo-1603126856191-3e60df3ff1b8?fit=crop&w=1600&q=80") no-repeat center center;
     background-size: cover;
-    filter: brightness(1.2) blur(1px);
+    filter: brightness(1.3) contrast(1.2);
     z-index: -1;
-    animation: galaxyMove 100s linear infinite;
+    animation: flow 60s linear infinite;
 }
 
-@keyframes galaxyMove {
-    from { background-position: 0 0; }
-    to { background-position: 2000px 2000px; }
+@keyframes flow {
+    0% { background-position: 0 0; }
+    50% { background-position: 1000px 500px; }
+    100% { background-position: 0 0; }
 }
 /* Hero Section */
 .hero {
