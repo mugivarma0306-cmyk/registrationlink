@@ -1,25 +1,14 @@
-/* BODY STYLING */
 body {
     margin: 0;
     min-height: 100vh;
-    background: #0a0a0a; /* dark night sky */
+    background: #0a0a0a; /* night sky */
     position: relative;
     font-family: Arial, sans-serif;
     overflow-x: hidden;
 }
 
-/* SKY LAYER (gradient) */
+/* Neon background grid (drone paths) */
 body::before {
-    content: "";
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: linear-gradient(180deg, #0a0a0a, #0f0f2f);
-    z-index: -3;
-}
-
-/* NEON LIGHT GRID (like drone paths) */
-body::after {
     content: "";
     position: fixed;
     top: 0; left: 0;
@@ -30,32 +19,34 @@ body::after {
     background-size: 100px 100px;
     z-index: -2;
     animation: droneGridMove 20s linear infinite;
-    opacity: 0.7;
 }
-
 @keyframes droneGridMove {
     0% { background-position: 0 0, 0 0; }
     50% { background-position: 200px 200px, 200px 200px; }
     100% { background-position: 0 0, 0 0; }
 }
 
-/* DRONE-LIKE PARTICLES */
+/* Glowing drone particles */
 .drone-particle {
     position: absolute;
-    width: 6px;
-    height: 6px;
+    width: 12px; 
+    height: 12px;
     border-radius: 50%;
-    background: #0ff; /* neon cyan */
-    opacity: 0.8;
-    animation: droneParticleMove;
-    animation: linear;
-    animation: infinite;
+    background: #0ff; 
+    box-shadow: 0 0 10px #0ff, 0 0 20px #0ff; /* glow effect */
+    opacity: 0.9;
+    animation-name: droneFly;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
 }
 
-@keyframes droneParticleMove {
-    0% { transform: translateY(0) translateX(0); opacity: 0.8; }
-    50% { transform: translateY(-500px) translateX(200px); opacity: 0.4; }
-    100% { transform: translateY(0) translateX(0); opacity: 0.8; }
+/* Flying animation */
+@keyframes droneFly {
+    0%   { transform: translate(0,0) rotate(0deg); opacity: 0.8; }
+    25%  { transform: translate(150px,-100px) rotate(15deg); opacity: 0.6; }
+    50%  { transform: translate(300px,50px) rotate(-10deg); opacity: 0.8; }
+    75%  { transform: translate(150px,150px) rotate(20deg); opacity: 0.7; }
+    100% { transform: translate(0,0) rotate(0deg); opacity: 0.9; }
 }
 /* Hero Section */
 .hero {
