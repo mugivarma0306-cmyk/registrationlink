@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Drone Theme Page</title>
+<style>
+/* BODY STYLING */
+body {
+    margin: 0;
+    min-height: 100vh;
+    background: #0a0a0a; /* night sky */
+    position: relative;
+    font-family: Arial, sans-serif;
+    overflow-x: hidden;
+}
+
+/* NEON GRID (Drone Paths) */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background:
+      linear-gradient(90deg, rgba(0,255,255,0.05) 1px, transparent 1px),
+      linear-gradient(rgba(0,255,255,0.05) 1px, transparent 1px);
+    background-size: 100px 100px;
+    z-index: -2;
+    animation: droneGridMove 20s linear infinite;
+}
+
+@keyframes droneGridMove {
+    0% { background-position: 0 0, 0 0; }
+    50% { background-position: 200px 200px, 200px 200px; }
+    100% { background-position: 0 0, 0 0; }
+}
+
+/* DRONE PARTICLES */
+.drone-particle {
+    position: absolute;
+    width: 12px; 
+    height: 12px;
+    border-radius: 50%;
+    background: #0ff; 
+    box-shadow: 0 0 10px #0ff, 0 0 20px #0ff; /* glow */
+    opacity: 0.9;
+    animation-name: droneFly;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+/* DRONE FLYING ANIMATION */
+@keyframes droneFly {
+    0%   { transform: translate(0,0) rotate(0deg); opacity: 0.8; }
+    25%  { transform: translate(150px,-100px) rotate(15deg); opacity: 0.6; }
+    50%  { transform: translate(300px,50px) rotate(-10deg); opacity: 0.8; }
+    75%  { transform: translate(150px,150px) rotate(20deg); opacity: 0.7; }
+    100% { transform: translate(0,0) rotate(0deg); opacity: 0.9; }
+}
+
+/* OPTIONAL CONTENT STYLING */
+h1 {
+    color: #0ff;
+    text-align: center;
+    margin-top: 50px;
+    text-shadow: 0 0 10px #0ff;
+}
+</style>
+</head>
+<body>
+
+<h1>Drone Showcase Page</h1>
+
+<!-- Drone Particles -->
+<div class="drone-particle" style="top:20%; left:10%; animation-duration:12s;"></div>
+<div class="drone-particle" style="top:40%; left:50%; animation-duration:18s;"></div>
+<div class="drone-particle" style="top:60%; left:70%; animation-duration:15s;"></div>
+<div class="drone-particle" style="top:30%; left:80%; animation-duration:20s;"></div>
+<div class="drone-particle" style="top:70%; left:30%; animation-duration:16s;"></div>
+
+</body>
+</html>
