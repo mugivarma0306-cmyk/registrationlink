@@ -79,3 +79,27 @@ footer{
     margin-top:40px;
     background: rgba(0,0,0,0.6);
 }
+.events-container{
+    width:80%;
+    margin:auto;
+    margin-top:40px;
+}
+
+.event-box{
+    background: rgba(0,0,0,0.6);
+    margin:15px 0;
+    padding:15px;
+    border-radius:10px;
+    cursor:pointer;
+}
+
+.event-box summary{
+    font-size:20px;
+    font-weight:bold;
+    outline:none;
+}
+
+.event-box p{
+    margin-top:10px;
+    line-height:1.6;
+}
