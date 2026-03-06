@@ -172,3 +172,12 @@ details p {
     font-size: 14px;
     color: 4da6ff;
 }
+.container{
+  max-width: 900px;
+  margin: auto;
+  padding: 20px;
+}
+
+section{
+  text-align: left;
+}
