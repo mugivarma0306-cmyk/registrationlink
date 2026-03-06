@@ -50,11 +50,12 @@ body::before {
 }
 /* Hero Section */
 .hero {
-    background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
-                url("https://images.unsplash.com/photo-1534447677768-be436bb09401");
+   body {
+    background-image: url("background.jpg");
     background-size: cover;
     background-position: center;
-    padding: 120px 20px;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 
 .hero h1 {
