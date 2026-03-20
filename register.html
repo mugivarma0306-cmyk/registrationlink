@@ -49,17 +49,35 @@
         <input type="email" name="email" placeholder="Your Email" required>
         <input type="text" name="college" placeholder="College Name" required>
 
-        <select name="event" required>
-            <option value="">Select Event</option>
-            <option>Rocketry</option>
-            <option>Visual Puzzle</option>
-            <option>Aero Quiz</option>
-            <option>Free Fire</option>
-        </select>
+       <select name="event" required>
+    <option value="">Select Event</option>
 
+    <optgroup label="✈️ Technical Events">
+        <option>Paper Presentation</option>
+        <option>Fixed Wing</option>
+        <option>Drone Coding</option>
+        <option>Rocketry</option>
+    </optgroup>
+
+    <optgroup label="🎉 Non-Technical Events">
+        <option>Visual Puzzle</option>
+        <option>Aero Quiz</option>
+        <option>Free Fire</option>
+    </optgroup>
+</select>
         <button type="submit">Submit Registration</button>
     </form>
 </section>
+
+<!-- ✅ Script must be here -->
+<script>
+    const params = new URLSearchParams(window.location.search);
+    const event = params.get("event");
+
+    if (event) {
+        document.querySelector("select[name='event']").value = event;
+    }
+</script>
 
 </body>
 </html>
