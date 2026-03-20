@@ -3,88 +3,138 @@
 <head>
     <title>Non-Technical Events</title>
 
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial;
-            background: #f5f5f5;
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1f1c2c, #928dab);
+            min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
+            color: white;
         }
 
         .events {
             width: 90%;
-            max-width: 600px;
+            max-width: 650px;
             text-align: center;
         }
 
         .section-title {
-            margin-bottom: 20px;
+            margin-bottom: 25px;
+            font-size: 2rem;
+            letter-spacing: 1px;
         }
 
         .event-container {
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 20px;
         }
 
         .event-box {
-            background: white;
-            padding: 15px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.2);
-            cursor: pointer;
+            background: rgba(255,255,255,0.1);
+            padding: 18px;
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: 0.3s;
+        }
+
+        .event-box:hover {
+            transform: scale(1.03);
+            box-shadow: 0 0 15px rgba(255, 100, 255, 0.5);
         }
 
         .event-box summary {
-            font-weight: bold;
-            font-size: 16px;
+            font-weight: 600;
+            font-size: 17px;
+            cursor: pointer;
+        }
+
+        .event-box p {
+            margin-top: 10px;
+            font-size: 14px;
+            opacity: 0.85;
         }
 
         .btn {
             display: inline-block;
-            margin-top: 25px;
-            padding: 12px 25px;
-            background: blue;
-            color: white;
+            margin-top: 30px;
+            padding: 12px 28px;
+            background: #ff7eb3;
+            color: black;
             text-decoration: none;
-            border-radius: 5px;
+            border-radius: 25px;
+            font-weight: 500;
+            transition: 0.3s;
         }
 
         .btn:hover {
-            background: darkblue;
+            background: white;
+            transform: scale(1.05);
+        }
+
+        /* ✨ Glow effect */
+        .glow {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: rgba(255, 100, 255, 0.3);
+            border-radius: 50%;
+            filter: blur(100px);
+            z-index: -1;
+        }
+
+        .glow:nth-child(1) {
+            top: 10%;
+            left: 10%;
+        }
+
+        .glow:nth-child(2) {
+            bottom: 10%;
+            right: 10%;
         }
     </style>
 </head>
 
 <body>
 
+<!-- Glow Background -->
+<div class="glow"></div>
+<div class="glow"></div>
+
 <section class="events">
     <h2 class="section-title">🎉 Non-Technical Events</h2>
 
     <div class="event-container">
-        
+
         <details class="event-box">
-            <summary>Glider Challenge</summary>
-            <p>Rules will be updated soon.</p>
+            <summary>🛩️ Glider Challenge</summary>
+            <p>Test your creativity by building and flying gliders.</p>
         </details>
 
         <details class="event-box">
-            <summary>Visual Puzzle</summary>
-            <p>Rules will be updated soon.</p>
+            <summary>🧩 Visual Puzzle</summary>
+            <p>Solve mind-bending puzzles and challenges.</p>
         </details>
 
         <details class="event-box">
-            <summary>Aero Quiz</summary>
-            <p>Rules will be updated soon.</p>
+            <summary>❓ Aero Quiz</summary>
+            <p>Compete in an exciting aeronautical quiz.</p>
         </details>
 
         <details class="event-box">
-            <summary>Free Fire</summary>
-            <p>Rules will be updated soon.</p>
+            <summary>🎮 Free Fire</summary>
+            <p>Battle it out in an intense gaming showdown.</p>
         </details>
 
         <!-- Register Button -->
