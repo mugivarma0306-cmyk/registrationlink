@@ -282,10 +282,13 @@ button:active{
     transform: translateY(0);
 }
 body{
-    background-position: center;
-    animation: moveBg 10s infinite alternate;
-}
+    background: linear-gradient(rgba(10,20,40,0.85), rgba(10,20,40,0.95)),
+                url("background.jpg") no-repeat center/cover fixed;
+    color:#f1f5f9;
 
+    animation: fadeIn 1s ease-in, moveBg 10s infinite alternate;
+    background-position: center;
+}
 @keyframes moveBg{
     from{
         background-position: center;
