@@ -30,3 +30,17 @@
  <footer>
         © 2026 Aero Symposium | Designed by Mukesh
  </footer>
+<script>
+const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if(entry.isIntersecting){
+            entry.target.classList.add("show");
+        }
+    });
+});
+
+document.querySelectorAll(".event-card, .event-box").forEach(el => {
+    el.classList.add("hidden");
+    observer.observe(el);
+});
+</script>
