@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Non-Technical Events</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            background: blue;
+            color: white;
+            text-decoration: none;
+        }
+
+        .form-section {
+            margin-top: 300px;
+        }
+    </style>
+</head>
+
+<body>
+
+<section class="events">
+    <h2 class="section-title">🎉 Non-Technical Events</h2>
+
+    <div class="event-container">
+        <details class="event-box">
+            <summary>Rocketry</summary>
+            <p>rules</p>
+        </details>
+
+        <details class="event-box">
+            <summary>Visual Puzzle</summary>
+            <p>rules</p>
+        </details>
+
+        <details class="event-box">
+            <summary>Aero Quiz</summary>
+            <p>rules</p>
+        </details>
+
+        <details class="event-box">
+            <summary>Free Fire</summary>
+            <p>rules</p>
+        </details>
+    </div>
+
+    <!-- Register Button -->
+    <a href="#register" class="btn">Register Now</a>
+</section>
+
+<!-- Register Section -->
+<section id="register" class="form-section">
+    <h2>Register Now</h2>
+
+    <form action="https://formspree.io/f/mlgwknke" method="POST">
+        <input type="text" name="name" placeholder="Your Name" required><br><br>
+        <input type="email" name="email" placeholder="Your Email" required><br><br>
+        <input type="text" name="college" placeholder="College Name" required><br><br>
+
+        <select name="event" required>
+            <option value="">Select Event</option>
+            <option>Rocketry</option>
+            <option>Visual Puzzle</option>
+            <option>Aero Quiz</option>
+            <option>Free Fire</option>
+        </select><br><br>
+
+        <button type="submit">Submit Registration</button>
+    </form>
+</section>
+
+</body>
+</html>
