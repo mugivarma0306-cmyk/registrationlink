@@ -1,67 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-        <tittle>Technical Eventd</tittle>
-        <link rel="stylesheet" href="style.css">
-</head>
-<body>
-<section class="events">
-        <h2 class="section-title">✈️ Technical Events</h2>
-        <div class="event-container">
-            <details class="event-box">
-            <summary>Paper Presentation</summary>
-                <p>
-                    rules<br>
-                </p>
-            </details>
-            <details  class="event-box">
-            <summary>Fixedwing</summary>
-                <p>
-                    rules<br>
-                </p>
-            </details>
-            <details  class="event-box">
-            <summary>Dronecoding</summary>
-                <p>
-                    rules<br>
-                </p>
-            </details>
-            <details class="event-box">
-            <summary>Rocketry</summary>
-                <p>
-                    rules<br>
-                </p>
-            </details>
-        </div>
-        <a href="#register" class="btn">Register Now</a>
-        
+    <title>Technical Events</title>
 
- <section id="register" class="form-section">
-        <h2>Register Now</h2>
-
-         <form action="https://formspree.io/f/mlgwknke" method="POST">
-            <input type="text" name="name" placeholder="Your Name" required>
-            <input type="email" name="email" placeholder="Your Email" required>
-            <input type="text" name="college" placeholder="College Name" required>
-
-            <select name="event" required>
-               <option value="">Select Event</option>
-        <optgroup label="✈️ Technical Events">
-            <option value="Paper Presentation">Paper Presentation</option>
-            <option value="fixedwing">fixedwing</option>
-            <option value="dronecoding">dronecoding</option>
-            <option value="rocetry">rocetry</option>
-        </optgroup>
-          </select>
-    <button type="submit">Submit Registration</button>
-</form>
-</section>
-</body>
-</html>
-   <!DOCTYPE html>
-<html>
-<head>
-    <title>Test</title>
+    <link rel="stylesheet" href="style.css">
 
     <style>
         html {
@@ -76,21 +18,61 @@
         }
 
         .form-section {
-            margin-top: 500px; /* this makes space to scroll */
+            margin-top: 300px;
         }
     </style>
 </head>
 
 <body>
 
-<!-- Button -->
-<a href="#register" class="btn">Register Now</a>
+<section class="events">
+    <h2 class="section-title">✈️ Technical Events</h2>
 
-<!-- Form Section -->
+    <div class="event-container">
+        <details class="event-box">
+            <summary>Paper Presentation</summary>
+            <p>rules</p>
+        </details>
+
+        <details class="event-box">
+            <summary>Fixedwing</summary>
+            <p>rules</p>
+        </details>
+
+        <details class="event-box">
+            <summary>Dronecoding</summary>
+            <p>rules</p>
+        </details>
+
+        <details class="event-box">
+            <summary>Rocketry</summary>
+            <p>rules</p>
+        </details>
+    </div>
+
+    <!-- Button -->
+    <a href="#register" class="btn">Register Now</a>
+</section>
+
+<!-- Register Section -->
 <section id="register" class="form-section">
     <h2>Register Now</h2>
-    <input type="text" placeholder="Name"><br><br>
-    <button>Submit</button>
+
+    <form action="https://formspree.io/f/mlgwknke" method="POST">
+        <input type="text" name="name" placeholder="Your Name" required><br><br>
+        <input type="email" name="email" placeholder="Your Email" required><br><br>
+        <input type="text" name="college" placeholder="College Name" required><br><br>
+
+        <select name="event" required>
+            <option value="">Select Event</option>
+            <option>Paper Presentation</option>
+            <option>Fixedwing</option>
+            <option>Dronecoding</option>
+            <option>Rocketry</option>
+        </select><br><br>
+
+        <button type="submit">Submit Registration</button>
+    </form>
 </section>
 
 </body>
