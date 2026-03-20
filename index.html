@@ -21,16 +21,7 @@
 <div class="drone-particle" style="top:60%; left:70%; animation-duration:15s;"></div>
 <div class="drone-particle" style="top:30%; left:80%; animation-duration:20s;"></div>
 <div class="drone-particle" style="top:70%; left:30%; animation-duration:16s;"></div>
-</body>
-</html>
-<nav>
-    <a href="technical.html">Technical Events</a>
-    <a href="nontechnical.html">Non-Technical Events</a>
-</nav>
- <footer>
-        © 2026 Aero Symposium | Designed by Mukesh
- </footer>
-<script>
+    <script>
 const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
         if(entry.isIntersecting){
@@ -44,3 +35,12 @@ document.querySelectorAll(".event-card, .event-box").forEach(el => {
     observer.observe(el);
 });
 </script>
+</body>
+</html>
+<nav>
+    <a href="technical.html">Technical Events</a>
+    <a href="nontechnical.html">Non-Technical Events</a>
+</nav>
+ <footer>
+        © 2026 Aero Symposium | Designed by Mukesh
+ </footer>
