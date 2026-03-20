@@ -1,37 +1,53 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Non-Technical Events</title>
-
-    <link rel="stylesheet" href="style.css">
+    <title>Register</title>
 
     <style>
-        html {
-            scroll-behavior: smooth;
-        }
+        body {
+            font-family: Arial;
+            margin: 0;
+            height: 100vh;
 
-        .btn {
-            padding: 10px 20px;
-            background: blue;
-            color: white;
-            text-decoration: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #f5f5f5;
         }
 
         .form-section {
-            margin-top: 300px;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+            text-align: center;
+        }
+
+        input, select {
+            display: block;
+            width: 250px;
+            margin: 10px auto;
+            padding: 10px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background: blue;
+            color: white;
+            border: none;
         }
     </style>
 </head>
-</section>
 
-<!-- Register Section -->
-<section id="register" class="form-section">
+<body>
+
+<section class="form-section">
     <h2>Register Now</h2>
 
     <form action="https://formspree.io/f/mlgwknke" method="POST">
-        <input type="text" name="name" placeholder="Your Name" required><br><br>
-        <input type="email" name="email" placeholder="Your Email" required><br><br>
-        <input type="text" name="college" placeholder="College Name" required><br><br>
+        <input type="text" name="name" placeholder="Your Name" required>
+        <input type="email" name="email" placeholder="Your Email" required>
+        <input type="text" name="college" placeholder="College Name" required>
 
         <select name="event" required>
             <option value="">Select Event</option>
@@ -39,7 +55,7 @@
             <option>Visual Puzzle</option>
             <option>Aero Quiz</option>
             <option>Free Fire</option>
-        </select><br><br>
+        </select>
 
         <button type="submit">Submit Registration</button>
     </form>
