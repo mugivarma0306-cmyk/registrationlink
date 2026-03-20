@@ -3,22 +3,59 @@
 <head>
     <title>Technical Events</title>
 
-    <link rel="stylesheet" href="style.css">
-
     <style>
-        html {
-            scroll-behavior: smooth;
+        body {
+            margin: 0;
+            font-family: Arial;
+            background: #f5f5f5;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .events {
+            width: 90%;
+            max-width: 600px;
+            text-align: center;
+        }
+
+        .section-title {
+            margin-bottom: 20px;
+        }
+
+        .event-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .event-box {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+            cursor: pointer;
+        }
+
+        .event-box summary {
+            font-weight: bold;
+            font-size: 16px;
         }
 
         .btn {
-            padding: 10px 20px;
+            display: inline-block;
+            margin-top: 25px;
+            padding: 12px 25px;
             background: blue;
             color: white;
             text-decoration: none;
+            border-radius: 5px;
         }
 
-        .form-section {
-            margin-top: 300px;
+        .btn:hover {
+            background: darkblue;
         }
     </style>
 </head>
@@ -29,29 +66,33 @@
     <h2 class="section-title">✈️ Technical Events</h2>
 
     <div class="event-container">
+
         <details class="event-box">
             <summary>Paper Presentation</summary>
-            <p>rules</p>
+            <p>Rules will be updated soon.</p>
+            <a href="register.html?event=Paper%20Presentation" class="btn">Register</a>
         </details>
 
         <details class="event-box">
-            <summary>Fixedwing</summary>
-            <p>rules</p>
+            <summary>Fixed Wing</summary>
+            <p>Rules will be updated soon.</p>
+            <a href="register.html?event=Fixed%20Wing" class="btn">Register</a>
         </details>
 
         <details class="event-box">
-            <summary>Dronecoding</summary>
-            <p>rules</p>
+            <summary>Drone Coding</summary>
+            <p>Rules will be updated soon.</p>
+            <a href="register.html?event=Drone%20Coding" class="btn">Register</a>
         </details>
 
         <details class="event-box">
             <summary>Rocketry</summary>
-            <p>rules</p>
+            <p>Rules will be updated soon.</p>
+            <a href="register.html?event=Rocketry" class="btn">Register</a>
         </details>
+
     </div>
 
-    <!-- Button -->
-    <a href="register.html" class="btn">Register Now</a>
 </section>
 
 </body>
