@@ -51,10 +51,10 @@
 
         <select name="event" required>
             <option value="">Select Event</option>
+           <option>Paper Presentation</option>
+            <option>Fixedwing</option>
+            <option>Dronecoding</option>
             <option>Rocketry</option>
-            <option>Visual Puzzle</option>
-            <option>Aero Quiz</option>
-            <option>Free Fire</option>
         </select>
 
         <button type="submit">Submit Registration</button>
