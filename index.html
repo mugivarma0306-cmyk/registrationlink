@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <style>
-        /* RESET */
         *{
             margin:0;
             padding:0;
@@ -19,17 +18,49 @@
             overflow:hidden;
         }
 
-        /* PARTICLES CANVAS */
+        /* GAME SCREEN */
+        #gameScreen{
+            position:fixed;
+            width:100%;
+            height:100%;
+            background:black;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            flex-direction:column;
+            z-index:1000;
+        }
+
+        #gameScreen h1{
+            color:#3b82f6;
+            margin-bottom:20px;
+            text-shadow:0 0 15px #3b82f6;
+        }
+
+        #startBtn{
+            padding:12px 25px;
+            background:#3b82f6;
+            border:none;
+            color:white;
+            border-radius:8px;
+            cursor:pointer;
+        }
+
+        #plane{
+            font-size:50px;
+            margin-top:20px;
+            display:none;
+            position:relative;
+        }
+
+        /* PARTICLES */
         #particles{
             position:fixed;
-            top:0;
-            left:0;
             width:100%;
             height:100%;
             z-index:-2;
         }
 
-        /* GLOW */
         .bg-glow{
             position: fixed;
             width:300px;
@@ -41,11 +72,7 @@
             animation: moveGlow 12s infinite alternate ease-in-out;
         }
 
-        .bg-glow:nth-child(2){
-            top:10%;
-            left:10%;
-        }
-
+        .bg-glow:nth-child(2){ top:10%; left:10%; }
         .bg-glow:nth-child(3){
             bottom:10%;
             right:10%;
@@ -57,7 +84,6 @@
             to{ transform: translate(80px, -40px); }
         }
 
-        /* HEADER */
         header{
             text-align:center;
             padding:25px;
@@ -65,7 +91,6 @@
             font-weight:bold;
         }
 
-        /* HERO */
         .hero{
             text-align:center;
             padding:100px 20px;
@@ -81,7 +106,6 @@
             font-size:18px;
         }
 
-        /* BUTTON */
         .btn{
             display:inline-block;
             margin:15px;
@@ -90,57 +114,48 @@
             color:white;
             text-decoration:none;
             border-radius:8px;
-            transition:0.3s;
         }
 
-        .btn:hover{
-            transform:scale(1.05);
-            box-shadow:0 0 15px #3b82f6;
-        }
-
-        /* CONTAINER */
         .container{
             width:80%;
             margin:auto;
             text-align:center;
         }
 
-        .section-title{
-            margin:20px 0;
-            font-size:26px;
-        }
-
-        .event-card{
-            background: rgba(255,255,255,0.05);
-            padding:20px;
-            border-radius:10px;
-        }
-
-        /* FOOTER */
         footer{
             text-align:center;
             margin-top:40px;
             padding:10px;
-            font-size:14px;
+        }
+
+        /* HIDE MAIN INITIALLY */
+        #mainContent{
+            display:none;
         }
     </style>
 </head>
 
 <body>
 
-<!-- PARTICLES -->
+<!-- GAME SCREEN -->
+<div id="gameScreen">
+    <h1>✈️ Enter Airspace</h1>
+    <button id="startBtn">Start Engine</button>
+    <div id="plane">✈️</div>
+</div>
+
+<!-- MAIN CONTENT -->
+<div id="mainContent">
+
 <canvas id="particles"></canvas>
 
-<!-- GLOW -->
 <div class="bg-glow"></div>
 <div class="bg-glow"></div>
 
-<!-- HEADER -->
 <header>
     ✈️ AERO SYMPOSIUM 2K26
 </header>
 
-<!-- HERO -->
 <div class="hero">
     <h1>Department of Aeronautical Engineering</h1>
     <p>Innovate • Design • Fly 🚀</p>
@@ -149,24 +164,39 @@
     <a href="nontechnical.html" class="btn">Non-Tech Events</a>
 </div>
 
-<!-- CONTENT -->
 <div class="container">
-    <h2 class="section-title">Welcome</h2>
-
-    <div class="event-card">
-        <p>
-            Join us for an exciting symposium with innovation, creativity, and fun.
-        </p>
-    </div>
+    <h2>Welcome</h2>
+    <p>Join us for an exciting symposium!</p>
 </div>
 
-<!-- FOOTER -->
 <footer>
     © 2026 Aero Symposium | Designed by Mukesh
 </footer>
 
-<!-- PARTICLE SCRIPT -->
+</div>
+
 <script>
+/* GAME LOGIC */
+const btn = document.getElementById("startBtn");
+const plane = document.getElementById("plane");
+
+btn.onclick = () => {
+    plane.style.display = "block";
+
+    let pos = 0;
+    let interval = setInterval(() => {
+        pos += 10;
+        plane.style.transform = `translateX(${pos}px)`;
+
+        if(pos > window.innerWidth){
+            clearInterval(interval);
+            document.getElementById("gameScreen").style.display="none";
+            document.getElementById("mainContent").style.display="block";
+        }
+    }, 30);
+};
+
+/* PARTICLES */
 const canvas = document.getElementById("particles");
 const ctx = canvas.getContext("2d");
 
@@ -207,4 +237,5 @@ function animate(){
 animate();
 </script>
 
+</body>
 </html>
