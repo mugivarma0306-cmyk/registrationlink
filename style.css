@@ -319,32 +319,39 @@ body{
     background: radial-gradient(circle, rgba(168,85,247,0.4), transparent);
 }
 
-@keyframes moveGlow{
-    from{
-        transform: translate(0,0);
-    }
-    to{
-        transform: translate(80px, -40px);
-    }
+.sky{
+    position:relative;
+    height:300px;
+    overflow:hidden;
 }
+
+/* Plane animation */
 #plane{
     width:120px;
     position:absolute;
-    top:50%;
+    bottom:0;
     left:-150px;
-    animation: fly 8s linear infinite;
+    animation: takeoff 6s ease-in-out infinite;
 }
 
-@keyframes fly{
+/* TAKEOFF animation */
+@keyframes takeoff{
     0%{
         left:-150px;
-        transform: rotate(5deg);
+        bottom:0;
+        transform: rotate(0deg);
     }
-    50%{
+    30%{
+        bottom:20px;
         transform: rotate(-5deg);
+    }
+    60%{
+        bottom:100px;
+        transform: rotate(-15deg);
     }
     100%{
         left:100%;
-        transform: rotate(5deg);
+        bottom:200px;
+        transform: rotate(-20deg);
     }
 }
