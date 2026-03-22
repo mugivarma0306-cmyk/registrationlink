@@ -327,3 +327,24 @@ body{
         transform: translate(80px, -40px);
     }
 }
+#plane{
+    width:120px;
+    position:absolute;
+    top:50%;
+    left:-150px;
+    animation: fly 8s linear infinite;
+}
+
+@keyframes fly{
+    0%{
+        left:-150px;
+        transform: rotate(5deg);
+    }
+    50%{
+        transform: rotate(-5deg);
+    }
+    100%{
+        left:100%;
+        transform: rotate(5deg);
+    }
+}
