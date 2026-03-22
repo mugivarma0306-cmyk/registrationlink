@@ -52,7 +52,6 @@ canvas{
 
 #intro h1{
     margin-bottom:20px;
-    letter-spacing:2px;
     color:#3b82f6;
 }
 
@@ -74,15 +73,15 @@ canvas{
     width:0%;
     background:#3b82f6;
     z-index:-1;
-    transition:width 0.1s;
 }
 
 /* PLANE */
 #plane{
     position:absolute;
     font-size:40px;
-    bottom:50%;
-    left:10%;
+    bottom:10%;
+    left:50%;
+    transform:translateX(-50%);
     display:none;
 }
 
@@ -226,26 +225,23 @@ function stopHold(){
     holding = false;
 }
 
-/* TAKEOFF ANIMATION */
+/* TAKEOFF (VERTICAL) */
 function takeoff(){
     plane.style.display="block";
 
-    let x = 10;
-    let y = 50;
+    let y = 10;
 
     let fly = setInterval(()=>{
-        x += 10;
-        y -= 3;
+        y += 2;   // 🔥 only vertical move
 
-        plane.style.left = x + "%";
         plane.style.bottom = y + "%";
 
-        if(x > 110){
+        if(y > 110){
             clearInterval(fly);
             document.getElementById("intro").style.display="none";
             document.getElementById("main").style.display="block";
         }
-    },50);
+    },30);
 }
 </script>
 
