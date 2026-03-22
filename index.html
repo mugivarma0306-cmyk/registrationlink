@@ -1,51 +1,29 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Aero Symposium 2K26</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-body{
+*{
     margin:0;
-    overflow:hidden;
-    font-family:sans-serif;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
     background:#0a1428;
     color:white;
+    overflow:hidden;
 }
 
-/* CANVAS */
+/* PARTICLES */
 canvas{
-    position:absolute;
-    top:0;
-    left:0;
-}
-
-/* SCORE */
-#scoreBox{
-    position:absolute;
-    top:20px;
-    left:20px;
-    font-size:18px;
-}
-
-/* ENTER BUTTON */
-#enterBtn{
-    position:absolute;
-    top:50%;
-    left:50%;
-    transform:translate(-50%,-50%);
-    padding:15px 30px;
-    background:#3b82f6;
-    border:none;
-    color:white;
-    font-size:18px;
-    display:none;
-    cursor:pointer;
-}
-
-/* MAIN SITE */
-#mainSite{
-    display:none;
+    position:fixed;
+    width:100%;
+    height:100%;
+    z-index:-2;
 }
 
 /* GLOW */
@@ -57,18 +35,68 @@ canvas{
     filter:blur(80px);
     z-index:-1;
 }
-
 .g1{ background:rgba(59,130,246,0.4); top:10%; left:10%; }
 .g2{ background:rgba(168,85,247,0.4); bottom:10%; right:10%; }
 
-/* HEADER */
+/* INTRO */
+#intro{
+    position:fixed;
+    width:100%;
+    height:100%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    z-index:1000;
+}
+
+#intro h1{
+    margin-bottom:20px;
+    letter-spacing:2px;
+    color:#3b82f6;
+}
+
+/* HOLD BUTTON */
+#holdBtn{
+    padding:15px 35px;
+    border:2px solid #3b82f6;
+    border-radius:12px;
+    cursor:pointer;
+    position:relative;
+    overflow:hidden;
+}
+
+#progress{
+    position:absolute;
+    top:0;
+    left:0;
+    height:100%;
+    width:0%;
+    background:#3b82f6;
+    z-index:-1;
+    transition:width 0.1s;
+}
+
+/* PLANE */
+#plane{
+    position:absolute;
+    font-size:40px;
+    bottom:50%;
+    left:10%;
+    display:none;
+}
+
+/* MAIN */
+#main{
+    display:none;
+}
+
 header{
     text-align:center;
     padding:25px;
     font-size:28px;
 }
 
-/* HERO */
 .hero{
     text-align:center;
     padding:100px 20px;
@@ -88,156 +116,136 @@ header{
 
 <body>
 
-<!-- GAME -->
-<canvas id="gameCanvas"></canvas>
-<div id="scoreBox">Score: <span id="score">0</span></div>
-<button id="enterBtn">ENTER SITE</button>
-
-<!-- MAIN WEBSITE -->
-<div id="mainSite">
-
 <canvas id="particles"></canvas>
 <div class="glow g1"></div>
 <div class="glow g2"></div>
 
-<header>✈️ AERO SYMPOSIUM 2K26</header>
+<!-- INTRO -->
+<div id="intro">
+    <h1>✈ HOLD TO TAKE OFF</h1>
 
-<div class="hero">
-    <h1>Department of Aeronautical Engineering</h1>
-    <p>Innovate • Design • Fly 🚀</p>
+    <div id="holdBtn">
+        <div id="progress"></div>
+        PRESS & HOLD
+    </div>
 
-    <a href="technical.html" class="btn">Technical Events</a>
-    <a href="nontechnical.html" class="btn">Non-Tech Events</a>
+    <div id="plane">✈️</div>
 </div>
 
+<!-- MAIN SITE -->
+<div id="main">
+    <header>✈️ AERO SYMPOSIUM 2K26</header>
+
+    <div class="hero">
+        <h1>Department of Aeronautical Engineering</h1>
+        <p>Innovate • Design • Fly 🚀</p>
+
+        <a href="technical.html" class="btn">Technical Events</a>
+        <a href="nontechnical.html" class="btn">Non-Tech Events</a>
+    </div>
 </div>
 
 <script>
-/* GAME */
-const canvas = document.getElementById("gameCanvas");
+/* PARTICLES */
+const canvas = document.getElementById("particles");
 const ctx = canvas.getContext("2d");
 
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
-let plane = {x:100,y:200,velocity:0};
-let gravity = 0.5;
-let obstacles = [];
-let score = 0;
-let gameOver = false;
-
-function createObstacle(){
-    let gap = 150;
-    let top = Math.random()*canvas.height/2;
-
-    obstacles.push({
-        x:canvas.width,
-        top:top,
-        bottom:top+gap
-    });
-}
-setInterval(createObstacle,1500);
-
-document.onclick = () => {
-    plane.velocity = -8;
-};
-
-function update(){
-    ctx.clearRect(0,0,canvas.width,canvas.height);
-
-    plane.velocity += gravity;
-    plane.y += plane.velocity;
-
-    ctx.fillText("✈️",plane.x,plane.y);
-
-    ctx.fillStyle="red";
-
-    obstacles.forEach((obs,i)=>{
-        obs.x -= 4;
-
-        ctx.fillRect(obs.x,0,50,obs.top);
-        ctx.fillRect(obs.x,obs.bottom,50,canvas.height);
-
-        if(
-            plane.x < obs.x+50 &&
-            plane.x+20 > obs.x &&
-            (plane.y < obs.top || plane.y > obs.bottom)
-        ){
-            gameOver = true;
-        }
-
-        if(obs.x < -50){
-            obstacles.splice(i,1);
-            score++;
-        }
-    });
-
-    document.getElementById("score").innerText = score;
-
-    if(score >= 5){
-        document.getElementById("enterBtn").style.display="block";
-        return;
-    }
-
-    if(!gameOver){
-        requestAnimationFrame(update);
-    }else{
-        alert("Game Over 😅");
-        location.reload();
-    }
-}
-update();
-
-/* ENTER SITE */
-document.getElementById("enterBtn").onclick = ()=>{
-    document.getElementById("gameCanvas").style.display="none";
-    document.getElementById("scoreBox").style.display="none";
-    document.getElementById("enterBtn").style.display="none";
-
-    document.getElementById("mainSite").style.display="block";
-
-    startParticles();
-};
-
-/* PARTICLES */
-function startParticles(){
-const canvas2 = document.getElementById("particles");
-const ctx2 = canvas2.getContext("2d");
-
-canvas2.width = window.innerWidth;
-canvas2.height = window.innerHeight;
-
 let particles = [];
 
-for (let i = 0; i < 100; i++) {
+for (let i = 0; i < 120; i++) {
     particles.push({
-        x: Math.random()*canvas2.width,
-        y: Math.random()*canvas2.height,
+        x: Math.random()*canvas.width,
+        y: Math.random()*canvas.height,
         r: Math.random()*2,
-        dx: Math.random()-0.5,
-        dy: Math.random()-0.5
+        dx: (Math.random()-0.5)*0.5,
+        dy: (Math.random()-0.5)*0.5
     });
 }
 
 function animate(){
-    ctx2.clearRect(0,0,canvas2.width,canvas2.height);
+    ctx.clearRect(0,0,canvas.width,canvas.height);
 
     particles.forEach(p=>{
-        ctx2.beginPath();
-        ctx2.arc(p.x,p.y,p.r,0,Math.PI*2);
-        ctx2.fillStyle="white";
-        ctx2.fill();
+        ctx.beginPath();
+        ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+        ctx.fillStyle="white";
+        ctx.fill();
 
         p.x+=p.dx;
         p.y+=p.dy;
 
-        if(p.x<0||p.x>canvas2.width) p.dx*=-1;
-        if(p.y<0||p.y>canvas2.height) p.dy*=-1;
+        if(p.x<0||p.x>canvas.width) p.dx*=-1;
+        if(p.y<0||p.y>canvas.height) p.dy*=-1;
     });
 
     requestAnimationFrame(animate);
 }
 animate();
+
+/* HOLD LOGIC */
+let holdBtn = document.getElementById("holdBtn");
+let progress = document.getElementById("progress");
+let plane = document.getElementById("plane");
+
+let holding = false;
+let width = 0;
+
+holdBtn.onmousedown = startHold;
+holdBtn.onmouseup = stopHold;
+holdBtn.onmouseleave = stopHold;
+
+holdBtn.ontouchstart = startHold;
+holdBtn.ontouchend = stopHold;
+
+function startHold(){
+    holding = true;
+
+    let interval = setInterval(()=>{
+        if(!holding){
+            clearInterval(interval);
+            width = 0;
+            progress.style.width = "0%";
+            return;
+        }
+
+        width += 2;
+        progress.style.width = width + "%";
+
+        if(width >= 100){
+            clearInterval(interval);
+            takeoff();
+        }
+
+    },30);
+}
+
+function stopHold(){
+    holding = false;
+}
+
+/* TAKEOFF ANIMATION */
+function takeoff(){
+    plane.style.display="block";
+
+    let x = 10;
+    let y = 50;
+
+    let fly = setInterval(()=>{
+        x += 10;
+        y -= 3;
+
+        plane.style.left = x + "%";
+        plane.style.bottom = y + "%";
+
+        if(x > 110){
+            clearInterval(fly);
+            document.getElementById("intro").style.display="none";
+            document.getElementById("main").style.display="block";
+        }
+    },50);
 }
 </script>
 
