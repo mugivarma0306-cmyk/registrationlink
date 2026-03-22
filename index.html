@@ -9,21 +9,21 @@
             margin:0;
             padding:0;
             box-sizing:border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', sans-serif;
         }
 
         body{
-            background: linear-gradient(rgba(10,20,40,0.9), rgba(10,20,40,0.95));
-            color:#f1f5f9;
+            background:#0a1428;
+            color:white;
             overflow:hidden;
         }
 
-        /* GAME SCREEN */
-        #gameScreen{
+        /* INTRO SCREEN */
+        #intro{
             position:fixed;
             width:100%;
             height:100%;
-            background:black;
+            background:#020617;
             display:flex;
             justify-content:center;
             align-items:center;
@@ -31,79 +31,46 @@
             z-index:1000;
         }
 
-        #gameScreen h1{
+        #intro h1{
             color:#3b82f6;
             margin-bottom:20px;
-            text-shadow:0 0 15px #3b82f6;
+            letter-spacing:2px;
         }
 
-        #startBtn{
-            padding:12px 25px;
-            background:#3b82f6;
-            border:none;
-            color:white;
-            border-radius:8px;
-            cursor:pointer;
+        .loader{
+            width:250px;
+            height:4px;
+            background:#1e293b;
+            border-radius:5px;
+            overflow:hidden;
         }
 
-        #plane{
-            font-size:50px;
-            margin-top:20px;
-            display:none;
-            position:relative;
-        }
-
-        /* PARTICLES */
-        #particles{
-            position:fixed;
-            width:100%;
+        .progress{
+            width:0%;
             height:100%;
-            z-index:-2;
+            background:#3b82f6;
+            animation: load 3s linear forwards;
         }
 
-        .bg-glow{
-            position: fixed;
-            width:300px;
-            height:300px;
-            background: radial-gradient(circle, rgba(59,130,246,0.4), transparent);
-            border-radius:50%;
-            filter: blur(80px);
-            z-index:-1;
-            animation: moveGlow 12s infinite alternate ease-in-out;
+        @keyframes load{
+            from{width:0%;}
+            to{width:100%;}
         }
 
-        .bg-glow:nth-child(2){ top:10%; left:10%; }
-        .bg-glow:nth-child(3){
-            bottom:10%;
-            right:10%;
-            background: radial-gradient(circle, rgba(168,85,247,0.4), transparent);
-        }
-
-        @keyframes moveGlow{
-            from{ transform: translate(0,0); }
-            to{ transform: translate(80px, -40px); }
+        /* MAIN */
+        #main{
+            display:none;
         }
 
         header{
             text-align:center;
             padding:25px;
             font-size:28px;
-            font-weight:bold;
         }
 
         .hero{
             text-align:center;
             padding:100px 20px;
-        }
-
-        .hero h1{
-            font-size:40px;
-            text-shadow:0 0 15px #3b82f6;
-        }
-
-        .hero p{
-            margin-top:10px;
-            font-size:18px;
         }
 
         .btn{
@@ -115,126 +82,37 @@
             text-decoration:none;
             border-radius:8px;
         }
-
-        .container{
-            width:80%;
-            margin:auto;
-            text-align:center;
-        }
-
-        footer{
-            text-align:center;
-            margin-top:40px;
-            padding:10px;
-        }
-
-        /* HIDE MAIN INITIALLY */
-        #mainContent{
-            display:none;
-        }
     </style>
 </head>
 
 <body>
 
-<!-- GAME SCREEN -->
-<div id="gameScreen">
-    <h1>✈️ Enter Airspace</h1>
-    <button id="startBtn">Start Engine</button>
-    <div id="plane">✈️</div>
+<!-- INTRO -->
+<div id="intro">
+    <h1>✈ Initializing Airspace...</h1>
+    <div class="loader">
+        <div class="progress"></div>
+    </div>
 </div>
 
-<!-- MAIN CONTENT -->
-<div id="mainContent">
+<!-- MAIN SITE -->
+<div id="main">
+    <header>✈️ AERO SYMPOSIUM 2K26</header>
 
-<canvas id="particles"></canvas>
+    <div class="hero">
+        <h1>Department of Aeronautical Engineering</h1>
+        <p>Innovate • Design • Fly 🚀</p>
 
-<div class="bg-glow"></div>
-<div class="bg-glow"></div>
-
-<header>
-    ✈️ AERO SYMPOSIUM 2K26
-</header>
-
-<div class="hero">
-    <h1>Department of Aeronautical Engineering</h1>
-    <p>Innovate • Design • Fly 🚀</p>
-
-    <a href="technical.html" class="btn">Technical Events</a>
-    <a href="nontechnical.html" class="btn">Non-Tech Events</a>
-</div>
-
-<div class="container">
-    <h2>Welcome</h2>
-    <p>Join us for an exciting symposium!</p>
-</div>
-
-<footer>
-    © 2026 Aero Symposium | Designed by Mukesh
-</footer>
-
+        <a href="technical.html" class="btn">Technical Events</a>
+        <a href="nontechnical.html" class="btn">Non-Tech Events</a>
+    </div>
 </div>
 
 <script>
-/* GAME LOGIC */
-const btn = document.getElementById("startBtn");
-const plane = document.getElementById("plane");
-
-btn.onclick = () => {
-    plane.style.display = "block";
-
-    let pos = 0;
-    let interval = setInterval(() => {
-        pos += 10;
-        plane.style.transform = `translateX(${pos}px)`;
-
-        if(pos > window.innerWidth){
-            clearInterval(interval);
-            document.getElementById("gameScreen").style.display="none";
-            document.getElementById("mainContent").style.display="block";
-        }
-    }, 30);
-};
-
-/* PARTICLES */
-const canvas = document.getElementById("particles");
-const ctx = canvas.getContext("2d");
-
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-
-let particles = [];
-
-for (let i = 0; i < 100; i++) {
-    particles.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        r: Math.random() * 2,
-        dx: Math.random() - 0.5,
-        dy: Math.random() - 0.5
-    });
-}
-
-function animate(){
-    ctx.clearRect(0,0,canvas.width,canvas.height);
-
-    particles.forEach(p=>{
-        ctx.beginPath();
-        ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-        ctx.fillStyle="white";
-        ctx.fill();
-
-        p.x += p.dx;
-        p.y += p.dy;
-
-        if(p.x<0 || p.x>canvas.width) p.dx*=-1;
-        if(p.y<0 || p.y>canvas.height) p.dy*=-1;
-    });
-
-    requestAnimationFrame(animate);
-}
-
-animate();
+setTimeout(()=>{
+    document.getElementById("intro").style.display="none";
+    document.getElementById("main").style.display="block";
+},3000);
 </script>
 
 </body>
