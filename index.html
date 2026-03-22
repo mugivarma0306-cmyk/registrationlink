@@ -75,14 +75,15 @@ canvas{
     z-index:-1;
 }
 
-/* PLANE */
+/* PLANE IMAGE */
 #plane{
     position:absolute;
-    font-size:40px;
-    bottom:10%;
+    bottom:5%;
     left:50%;
-    transform:translateX(-50%);
+    transform:translateX(-50%) rotate(-20deg);
+    width:80px;
     display:none;
+    filter: drop-shadow(0 0 10px #3b82f6);
 }
 
 /* MAIN */
@@ -128,7 +129,7 @@ header{
         PRESS & HOLD
     </div>
 
-    <div id="plane">✈️</div>
+    <img id="plane" src="https://cdn-icons-png.flaticon.com/512/744/744465.png">
 </div>
 
 <!-- MAIN SITE -->
@@ -225,15 +226,14 @@ function stopHold(){
     holding = false;
 }
 
-/* TAKEOFF (VERTICAL) */
+/* TAKEOFF */
 function takeoff(){
     plane.style.display="block";
 
-    let y = 10;
+    let y = 5;
 
     let fly = setInterval(()=>{
-        y += 2;   // 🔥 only vertical move
-
+        y += 2;
         plane.style.bottom = y + "%";
 
         if(y > 110){
@@ -247,3 +247,4 @@ function takeoff(){
 
 </body>
 </html>
+ 
