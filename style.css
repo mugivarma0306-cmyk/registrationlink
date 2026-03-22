@@ -355,3 +355,6 @@ body{
         transform: rotate(-20deg);
     }
 }
+.sky{
+    background: linear-gradient(to top, #0f172a, #1e3a8a, #60a5fa);
+}
