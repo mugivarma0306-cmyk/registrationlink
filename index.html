@@ -1,203 +1,152 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Aero Symposium 2K26</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aero Symposium 2K26</title>
 
-    <style>
-        *{
-            margin:0;
-            padding:0;
-            box-sizing:border-box;
-            font-family:'Segoe UI', sans-serif;
-        }
+<style>
+body{
+    margin:0;
+    overflow:hidden;
+    background:black;
+    font-family:sans-serif;
+    color:white;
+}
 
-        body{
-            background:#0a1428;
-            color:white;
-            overflow:hidden;
-        }
+/* GAME CANVAS */
+#gameCanvas{
+    display:block;
+}
 
-        canvas{
-            position:fixed;
-            width:100%;
-            height:100%;
-            top:0;
-            left:0;
-            z-index:-2;
-        }
+/* UI */
+#ui{
+    position:absolute;
+    top:20px;
+    left:20px;
+}
 
-        /* GLOW */
-        .glow{
-            position:fixed;
-            width:300px;
-            height:300px;
-            border-radius:50%;
-            filter:blur(80px);
-            z-index:-1;
-        }
-
-        .g1{
-            background:rgba(59,130,246,0.4);
-            top:10%;
-            left:10%;
-        }
-
-        .g2{
-            background:rgba(168,85,247,0.4);
-            bottom:10%;
-            right:10%;
-        }
-
-        /* INTRO */
-        #intro{
-            position:fixed;
-            width:100%;
-            height:100%;
-            background:rgba(2,6,23,0.9);
-            display:flex;
-            justify-content:center;
-            align-items:center;
-            flex-direction:column;
-            z-index:1000;
-            transition:opacity 1s ease;
-        }
-
-        #intro h1{
-            color:#3b82f6;
-            margin-bottom:20px;
-        }
-
-        .loader{
-            width:250px;
-            height:4px;
-            background:#1e293b;
-            border-radius:5px;
-            overflow:hidden;
-        }
-
-        .progress{
-            height:100%;
-            background:#3b82f6;
-            animation:load 3s linear forwards;
-        }
-
-        @keyframes load{
-            from{width:0%;}
-            to{width:100%;}
-        }
-
-        /* MAIN */
-        #main{
-            display:none;
-        }
-
-        header{
-            text-align:center;
-            padding:25px;
-            font-size:28px;
-        }
-
-        .hero{
-            text-align:center;
-            padding:100px 20px;
-        }
-
-        .btn{
-            display:inline-block;
-            margin:15px;
-            padding:12px 25px;
-            background:#3b82f6;
-            color:white;
-            text-decoration:none;
-            border-radius:8px;
-            transition:0.3s;
-        }
-
-        .btn:hover{
-            box-shadow:0 0 15px #3b82f6;
-        }
-    </style>
+#enterBtn{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    padding:15px 30px;
+    background:#3b82f6;
+    border:none;
+    color:white;
+    font-size:18px;
+    display:none;
+    cursor:pointer;
+}
+</style>
 </head>
 
 <body>
 
-<canvas id="particles"></canvas>
-<div class="glow g1"></div>
-<div class="glow g2"></div>
-
-<!-- INTRO -->
-<div id="intro">
-    <h1>✈ Initializing Airspace...</h1>
-    <div class="loader">
-        <div class="progress"></div>
-    </div>
-</div>
-
-<!-- MAIN -->
-<div id="main">
-    <header>✈️ AERO SYMPOSIUM 2K26</header>
-
-    <div class="hero">
-        <h1>Department of Aeronautical Engineering</h1>
-        <p>Innovate • Design • Fly 🚀</p>
-
-        <a href="technical.html" class="btn">Technical Events</a>
-        <a href="nontechnical.html" class="btn">Non-Tech Events</a>
-    </div>
-</div>
+<canvas id="gameCanvas"></canvas>
+<div id="ui">Score: <span id="score">0</span></div>
+<button id="enterBtn">ENTER SITE</button>
 
 <script>
-/* PARTICLES */
-const canvas = document.getElementById("particles");
+const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
 
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
-let particles = [];
+/* PLAYER */
+let plane = {
+    x:100,
+    y:200,
+    size:20,
+    velocity:0
+};
 
-for (let i = 0; i < 120; i++) {
-    particles.push({
-        x: Math.random()*canvas.width,
-        y: Math.random()*canvas.height,
-        r: Math.random()*2,
-        dx: (Math.random()-0.5)*0.5,
-        dy: (Math.random()-0.5)*0.5
+/* GAME */
+let gravity = 0.5;
+let obstacles = [];
+let score = 0;
+let gameOver = false;
+
+/* CREATE OBSTACLES */
+function createObstacle(){
+    let gap = 150;
+    let top = Math.random()*canvas.height/2;
+
+    obstacles.push({
+        x:canvas.width,
+        top:top,
+        bottom:top+gap
     });
 }
 
-function animate(){
+setInterval(createObstacle,1500);
+
+/* CONTROL */
+document.onclick = () => {
+    plane.velocity = -8;
+};
+
+/* GAME LOOP */
+function update(){
     ctx.clearRect(0,0,canvas.width,canvas.height);
 
-    particles.forEach(p=>{
-        ctx.beginPath();
-        ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-        ctx.fillStyle="white";
-        ctx.fill();
+    /* PLANE */
+    plane.velocity += gravity;
+    plane.y += plane.velocity;
 
-        p.x+=p.dx;
-        p.y+=p.dy;
+    ctx.fillStyle="white";
+    ctx.fillText("✈️",plane.x,plane.y);
 
-        if(p.x<0||p.x>canvas.width) p.dx*=-1;
-        if(p.y<0||p.y>canvas.height) p.dy*=-1;
+    /* OBSTACLES */
+    ctx.fillStyle="red";
+
+    obstacles.forEach((obs,i)=>{
+        obs.x -= 4;
+
+        ctx.fillRect(obs.x,0,50,obs.top);
+        ctx.fillRect(obs.x,obs.bottom,50,canvas.height);
+
+        /* COLLISION */
+        if(
+            plane.x < obs.x+50 &&
+            plane.x+20 > obs.x &&
+            (plane.y < obs.top || plane.y > obs.bottom)
+        ){
+            gameOver = true;
+        }
+
+        if(obs.x < -50){
+            obstacles.splice(i,1);
+            score++;
+        }
     });
 
-    requestAnimationFrame(animate);
+    document.getElementById("score").innerText = score;
+
+    /* WIN CONDITION */
+    if(score >= 5){
+        document.getElementById("enterBtn").style.display="block";
+        return;
+    }
+
+    if(!gameOver){
+        requestAnimationFrame(update);
+    }else{
+        alert("Game Over 😅 Try again");
+        location.reload();
+    }
 }
-animate();
 
-/* INTRO FADE */
-setTimeout(()=>{
-    const intro = document.getElementById("intro");
-    intro.style.opacity = "0";
+update();
 
-    setTimeout(()=>{
-        intro.style.display="none";
-        document.getElementById("main").style.display="block";
-    },1000);
-
-},3000);
+/* ENTER SITE */
+document.getElementById("enterBtn").onclick = ()=>{
+    document.body.innerHTML = `
+    <h1 style="text-align:center;margin-top:40vh;">
+    ✈️ Welcome to Aero Symposium 2K26 🚀
+    </h1>`;
+};
 </script>
 
 </body>
