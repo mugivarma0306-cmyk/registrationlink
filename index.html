@@ -8,23 +8,27 @@
 body{
     margin:0;
     overflow:hidden;
-    background:black;
     font-family:sans-serif;
+    background:#0a1428;
     color:white;
 }
 
-/* GAME CANVAS */
-#gameCanvas{
-    display:block;
+/* CANVAS */
+canvas{
+    position:absolute;
+    top:0;
+    left:0;
 }
 
-/* UI */
-#ui{
+/* SCORE */
+#scoreBox{
     position:absolute;
     top:20px;
     left:20px;
+    font-size:18px;
 }
 
+/* ENTER BUTTON */
 #enterBtn{
     position:absolute;
     top:50%;
@@ -38,37 +42,90 @@ body{
     display:none;
     cursor:pointer;
 }
+
+/* MAIN SITE */
+#mainSite{
+    display:none;
+}
+
+/* GLOW */
+.glow{
+    position:fixed;
+    width:300px;
+    height:300px;
+    border-radius:50%;
+    filter:blur(80px);
+    z-index:-1;
+}
+
+.g1{ background:rgba(59,130,246,0.4); top:10%; left:10%; }
+.g2{ background:rgba(168,85,247,0.4); bottom:10%; right:10%; }
+
+/* HEADER */
+header{
+    text-align:center;
+    padding:25px;
+    font-size:28px;
+}
+
+/* HERO */
+.hero{
+    text-align:center;
+    padding:100px 20px;
+}
+
+.btn{
+    display:inline-block;
+    margin:15px;
+    padding:12px 25px;
+    background:#3b82f6;
+    color:white;
+    text-decoration:none;
+    border-radius:8px;
+}
 </style>
 </head>
 
 <body>
 
+<!-- GAME -->
 <canvas id="gameCanvas"></canvas>
-<div id="ui">Score: <span id="score">0</span></div>
+<div id="scoreBox">Score: <span id="score">0</span></div>
 <button id="enterBtn">ENTER SITE</button>
 
+<!-- MAIN WEBSITE -->
+<div id="mainSite">
+
+<canvas id="particles"></canvas>
+<div class="glow g1"></div>
+<div class="glow g2"></div>
+
+<header>✈️ AERO SYMPOSIUM 2K26</header>
+
+<div class="hero">
+    <h1>Department of Aeronautical Engineering</h1>
+    <p>Innovate • Design • Fly 🚀</p>
+
+    <a href="technical.html" class="btn">Technical Events</a>
+    <a href="nontechnical.html" class="btn">Non-Tech Events</a>
+</div>
+
+</div>
+
 <script>
+/* GAME */
 const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
 
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
-/* PLAYER */
-let plane = {
-    x:100,
-    y:200,
-    size:20,
-    velocity:0
-};
-
-/* GAME */
+let plane = {x:100,y:200,velocity:0};
 let gravity = 0.5;
 let obstacles = [];
 let score = 0;
 let gameOver = false;
 
-/* CREATE OBSTACLES */
 function createObstacle(){
     let gap = 150;
     let top = Math.random()*canvas.height/2;
@@ -79,26 +136,20 @@ function createObstacle(){
         bottom:top+gap
     });
 }
-
 setInterval(createObstacle,1500);
 
-/* CONTROL */
 document.onclick = () => {
     plane.velocity = -8;
 };
 
-/* GAME LOOP */
 function update(){
     ctx.clearRect(0,0,canvas.width,canvas.height);
 
-    /* PLANE */
     plane.velocity += gravity;
     plane.y += plane.velocity;
 
-    ctx.fillStyle="white";
     ctx.fillText("✈️",plane.x,plane.y);
 
-    /* OBSTACLES */
     ctx.fillStyle="red";
 
     obstacles.forEach((obs,i)=>{
@@ -107,7 +158,6 @@ function update(){
         ctx.fillRect(obs.x,0,50,obs.top);
         ctx.fillRect(obs.x,obs.bottom,50,canvas.height);
 
-        /* COLLISION */
         if(
             plane.x < obs.x+50 &&
             plane.x+20 > obs.x &&
@@ -124,7 +174,6 @@ function update(){
 
     document.getElementById("score").innerText = score;
 
-    /* WIN CONDITION */
     if(score >= 5){
         document.getElementById("enterBtn").style.display="block";
         return;
@@ -133,20 +182,63 @@ function update(){
     if(!gameOver){
         requestAnimationFrame(update);
     }else{
-        alert("Game Over 😅 Try again");
+        alert("Game Over 😅");
         location.reload();
     }
 }
-
 update();
 
 /* ENTER SITE */
 document.getElementById("enterBtn").onclick = ()=>{
-    document.body.innerHTML = `
-    <h1 style="text-align:center;margin-top:40vh;">
-    ✈️ Welcome to Aero Symposium 2K26 🚀
-    </h1>`;
+    document.getElementById("gameCanvas").style.display="none";
+    document.getElementById("scoreBox").style.display="none";
+    document.getElementById("enterBtn").style.display="none";
+
+    document.getElementById("mainSite").style.display="block";
+
+    startParticles();
 };
+
+/* PARTICLES */
+function startParticles(){
+const canvas2 = document.getElementById("particles");
+const ctx2 = canvas2.getContext("2d");
+
+canvas2.width = window.innerWidth;
+canvas2.height = window.innerHeight;
+
+let particles = [];
+
+for (let i = 0; i < 100; i++) {
+    particles.push({
+        x: Math.random()*canvas2.width,
+        y: Math.random()*canvas2.height,
+        r: Math.random()*2,
+        dx: Math.random()-0.5,
+        dy: Math.random()-0.5
+    });
+}
+
+function animate(){
+    ctx2.clearRect(0,0,canvas2.width,canvas2.height);
+
+    particles.forEach(p=>{
+        ctx2.beginPath();
+        ctx2.arc(p.x,p.y,p.r,0,Math.PI*2);
+        ctx2.fillStyle="white";
+        ctx2.fill();
+
+        p.x+=p.dx;
+        p.y+=p.dy;
+
+        if(p.x<0||p.x>canvas2.width) p.dx*=-1;
+        if(p.y<0||p.y>canvas2.height) p.dy*=-1;
+    });
+
+    requestAnimationFrame(animate);
+}
+animate();
+}
 </script>
 
 </body>
