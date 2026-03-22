@@ -190,9 +190,18 @@ let plane = document.getElementById("plane");
 let holding = false;
 let width = 0;
 
+// Laptop (mouse)
 holdBtn.onmousedown = startHold;
 holdBtn.onmouseup = stopHold;
 holdBtn.onmouseleave = stopHold;
+
+// Mobile (touch)
+holdBtn.ontouchstart = startHold;
+holdBtn.ontouchend = stopHold;
+    holdBtn.ontouchstart = (e) => {
+    e.preventDefault();
+    startHold();
+};
 
 function startHold(){
     holding = true;
