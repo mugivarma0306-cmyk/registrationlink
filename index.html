@@ -198,13 +198,10 @@ let holding = false;
 let width = 0;
 
 /* EVENTS */
-holdBtn.addEventListener("mousedown", startHold);
-holdBtn.addEventListener("mouseup", stopHold);
-holdBtn.addEventListener("mouseleave", stopHold);
-
-holdBtn.addEventListener("touchstart", startHold);
-holdBtn.addEventListener("touchend", stopHold);
-holdBtn.addEventListener("touchcancel", stopHold);
+holdBtn.addEventListener("pointerdown", startHold);
+holdBtn.addEventListener("pointerup", stopHold);
+holdBtn.addEventListener("pointerleave", stopHold);
+holdBtn.addEventListener("pointercancel", stopHold);
 
 function startHold(){
     if (holding) return;
