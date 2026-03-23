@@ -230,7 +230,6 @@ function stopHold(){
     holding = false;
 }
 
-/* ✈️ TAKEOFF */
 function takeoff(){
     plane.style.display = "block";
 
@@ -242,28 +241,43 @@ function takeoff(){
     plane.style.left = x + "px";
     plane.style.top = y + "px";
 
-    // slight backward
-    let back = setInterval(()=>{
-        x -= 3;
-        plane.style.left = x + "px";
+    let angle = 0;
+    let radius = 80;
+    let phase = 0;
 
-        if(x < rect.left - 100){
-            clearInterval(back);
-            forward();
+    let fly = setInterval(()=>{
+
+        // ✈️ PHASE 1 → Move forward a bit
+        if(phase === 0){
+            x += 4;
+            plane.style.transform = "rotate(0deg)";
+
+            if(x > rect.left + 120){
+                phase = 1;
+                angle = 0;
+            }
         }
-    },20);
 
-    function forward(){
-        let speed = 4;
+        // 🔁 PHASE 2 → U-TURN (semi-circle)
+        else if(phase === 1){
+            angle += 0.05;
 
-        let fly = setInterval(()=>{
-            x += speed;
-            y -= 2;
-            speed += 0.2;
+            x += Math.cos(angle) * 3;
+            y += Math.sin(angle) * 3;
 
-            plane.style.left = x + "px";
-            plane.style.top = y + "px";
-            plane.style.transform = "rotate(-25deg)";
+            plane.style.transform = `rotate(${angle * 180/Math.PI}deg)`;
+
+            if(angle >= Math.PI){
+                phase = 2;
+            }
+        }
+
+        // 🚀 PHASE 3 → Fly diagonally up
+        else if(phase === 2){
+            x += 6;
+            y -= 3;
+
+            plane.style.transform = "rotate(-30deg)";
 
             if(x > window.innerWidth){
                 clearInterval(fly);
@@ -271,8 +285,12 @@ function takeoff(){
                 document.getElementById("intro").style.display="none";
                 document.getElementById("main").style.display="block";
             }
-        },20);
-    }
+        }
+
+        plane.style.left = x + "px";
+        plane.style.top = y + "px";
+
+    },20);
 }
 </script>
 
