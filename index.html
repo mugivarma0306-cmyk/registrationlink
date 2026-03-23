@@ -15,7 +15,7 @@
 body{
     background:#0a1428;
     color:white;
-    overflow-x:hidden;
+    overflow:hidden;
 }
 
 /* PARTICLES */
@@ -53,6 +53,7 @@ canvas{
 #intro h1{
     margin-bottom:20px;
     color:#3b82f6;
+    text-align:center;
 }
 
 /* HOLD BUTTON */
@@ -63,6 +64,8 @@ canvas{
     cursor:pointer;
     position:relative;
     overflow:hidden;
+    user-select:none;
+    touch-action:none;
 }
 
 #progress{
@@ -77,25 +80,25 @@ canvas{
 
 /* ✈️ PLANE */
 #plane{
-    width:100px;
+    width:90px;
     display:none;
     position:fixed;
     filter: drop-shadow(0 0 15px #3b82f6);
+    transition: transform 0.2s;
 }
 
 /* MAIN */
 #main{
     display:none;
+    text-align:center;
 }
 
 header{
-    text-align:center;
     padding:25px;
-    font-size:28px;
+    font-size:26px;
 }
 
 .hero{
-    text-align:center;
     padding:100px 20px;
 }
 
@@ -147,8 +150,12 @@ header{
 const canvas = document.getElementById("particles");
 const ctx = canvas.getContext("2d");
 
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+function resizeCanvas(){
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+}
+resizeCanvas();
+window.addEventListener("resize", resizeCanvas);
 
 let particles = [];
 
@@ -190,11 +197,18 @@ let plane = document.getElementById("plane");
 let holding = false;
 let width = 0;
 
-holdBtn.onmousedown = startHold;
-holdBtn.onmouseup = stopHold;
-holdBtn.onmouseleave = stopHold;
+/* EVENTS */
+holdBtn.addEventListener("mousedown", startHold);
+holdBtn.addEventListener("mouseup", stopHold);
+holdBtn.addEventListener("mouseleave", stopHold);
+
+holdBtn.addEventListener("touchstart", startHold);
+holdBtn.addEventListener("touchend", stopHold);
+holdBtn.addEventListener("touchcancel", stopHold);
 
 function startHold(){
+    if (holding) return;
+
     holding = true;
 
     let interval = setInterval(()=>{
@@ -219,7 +233,7 @@ function stopHold(){
     holding = false;
 }
 
-/* ✈️ TAKEOFF FROM BUTTON */
+/* ✈️ TAKEOFF */
 function takeoff(){
     plane.style.display = "block";
 
@@ -231,12 +245,12 @@ function takeoff(){
     plane.style.left = x + "px";
     plane.style.top = y + "px";
 
-    // 🔙 BACKWARD
+    // slight backward
     let back = setInterval(()=>{
         x -= 3;
         plane.style.left = x + "px";
 
-        if(x < rect.left - 120){
+        if(x < rect.left - 100){
             clearInterval(back);
             forward();
         }
@@ -247,7 +261,7 @@ function takeoff(){
 
         let fly = setInterval(()=>{
             x += speed;
-            y -= 1.5;
+            y -= 2;
             speed += 0.2;
 
             plane.style.left = x + "px";
