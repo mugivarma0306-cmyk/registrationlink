@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Flight Takeoff</title>
+    <title>Aero Symposium ✈️</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
 
     <style>
         body {
@@ -13,82 +12,113 @@
             height: 100vh;
             overflow: hidden;
             font-family: 'Poppins', sans-serif;
+            text-align: center;
 
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
-            flex-direction: column;
 
-            background: linear-gradient(to top, #6dd5fa, #ffffff);
+            background: linear-gradient(to top, #4facfe, #ffffff);
         }
 
         h1 {
-            margin-bottom: 20px;
-            color: #333;
+            font-size: 28px;
+            color: #222;
         }
 
+        /* Plane */
+        .plane {
+            width: 130px;
+            position: absolute;
+            bottom: 120px;
+            left: 50%;
+            transform: translateX(-50%);
+            transition: transform 3s ease-in-out;
+        }
+
+        .fly {
+            transform: translate(-50%, -650px) rotate(-30deg);
+        }
+
+        /* Runway */
         .runway {
             position: absolute;
             bottom: 0;
             width: 100%;
             height: 120px;
-            background: #444;
+            background: #222;
         }
 
-        .plane {
-            width: 130px;
-            position: absolute;
-            bottom: 110px;
-            left: 50%;
-            transform: translateX(-50%);
-            transition: transform 4s ease-in-out;
-        }
-
-        .fly {
-            transform: translate(-50%, -600px) rotate(-25deg);
-        }
-
+        /* Button */
         .btn {
             padding: 12px 25px;
+            margin-top: 20px;
             font-size: 16px;
             border: none;
-            border-radius: 10px;
-            background: #222;
+            border-radius: 8px;
+            background: #111;
             color: white;
             cursor: pointer;
+        }
+
+        /* Selection Buttons */
+        .options {
+            display: none;
             margin-top: 20px;
+        }
+
+        .opt-btn {
+            padding: 12px 20px;
+            margin: 10px;
+            border: none;
+            border-radius: 10px;
+            background: #333;
+            color: white;
+            cursor: pointer;
+        }
+
+        .opt-btn:hover {
+            background: #555;
         }
     </style>
 </head>
 
 <body>
 
-<h1>✈️ Flight Takeoff</h1>
+<h1>✈️ Aero Symposium 2K26</h1>
 
 <img src="plane.png" id="plane" class="plane">
 
 <div class="runway"></div>
 
 <button class="btn"
-        ontouchstart="startFly()"
-        ontouchend="stopFly()"
         onmousedown="startFly()"
-        onmouseup="stopFly()">
-    Press & Hold to Fly 🚀
+        ontouchstart="startFly()">
+    Press & Hold to Takeoff 🚀
 </button>
 
+<div class="options" id="options">
+    <button class="opt-btn" onclick="goTech()">💻 Tech Events</button>
+    <button class="opt-btn" onclick="goNonTech()">🎉 Non-Tech Events</button>
+</div>
+
 <script>
-    let timer;
+function startFly() {
+    document.getElementById("plane").classList.add("fly");
 
-    function startFly() {
-        timer = setTimeout(() => {
-            document.getElementById("plane").classList.add("fly");
-        }, 500); // hold for 0.5 sec
-    }
+    setTimeout(() => {
+        document.getElementById("options").style.display = "block";
+    }, 2000);
+}
 
-    function stopFly() {
-        clearTimeout(timer);
-    }
+function goTech() {
+    window.location.href = "tech.html";
+}
+
+function goNonTech() {
+    window.location.href = "nontech.html";
+}
 </script>
 
 </body>
