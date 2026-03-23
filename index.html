@@ -1,123 +1,267 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Aero Symposium ✈️</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aero Symposium 2K26</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
 
-    <style>
-        body {
-            margin: 0;
-            height: 100vh;
-            overflow: hidden;
-            font-family: 'Poppins', sans-serif;
-            text-align: center;
+body{
+    background:#0a1428;
+    color:white;
+    overflow-x:hidden;
+}
 
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+/* PARTICLES */
+canvas{
+    position:fixed;
+    width:100%;
+    height:100%;
+    z-index:-2;
+}
 
-            background: linear-gradient(to top, #4facfe, #ffffff);
-        }
+/* GLOW */
+.glow{
+    position:fixed;
+    width:300px;
+    height:300px;
+    border-radius:50%;
+    filter:blur(80px);
+    z-index:-1;
+}
+.g1{ background:rgba(59,130,246,0.4); top:10%; left:10%; }
+.g2{ background:rgba(168,85,247,0.4); bottom:10%; right:10%; }
 
-        h1 {
-            font-size: 28px;
-            color: #222;
-        }
+/* INTRO */
+#intro{
+    position:fixed;
+    width:100%;
+    height:100%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    z-index:1000;
+}
 
-        /* Plane */
-        .plane {
-            width: 130px;
-            position: absolute;
-            bottom: 120px;
-            left: 50%;
-            transform: translateX(-50%);
-            transition: transform 3s ease-in-out;
-        }
+#intro h1{
+    margin-bottom:20px;
+    color:#3b82f6;
+}
 
-        .fly {
-            transform: translate(-50%, -650px) rotate(-30deg);
-        }
+/* HOLD BUTTON */
+#holdBtn{
+    padding:15px 35px;
+    border:2px solid #3b82f6;
+    border-radius:12px;
+    cursor:pointer;
+    position:relative;
+    overflow:hidden;
+}
 
-        /* Runway */
-        .runway {
-            position: absolute;
-            bottom: 0;
-            width: 100%;
-            height: 120px;
-            background: #222;
-        }
+#progress{
+    position:absolute;
+    top:0;
+    left:0;
+    height:100%;
+    width:0%;
+    background:#3b82f6;
+    z-index:-1;
+}
 
-        /* Button */
-        .btn {
-            padding: 12px 25px;
-            margin-top: 20px;
-            font-size: 16px;
-            border: none;
-            border-radius: 8px;
-            background: #111;
-            color: white;
-            cursor: pointer;
-        }
+/* ✈️ PLANE */
+#plane{
+    width:100px;
+    display:none;
+    position:fixed;
+    filter: drop-shadow(0 0 15px #3b82f6);
+}
 
-        /* Selection Buttons */
-        .options {
-            display: none;
-            margin-top: 20px;
-        }
+/* MAIN */
+#main{
+    display:none;
+}
 
-        .opt-btn {
-            padding: 12px 20px;
-            margin: 10px;
-            border: none;
-            border-radius: 10px;
-            background: #333;
-            color: white;
-            cursor: pointer;
-        }
+header{
+    text-align:center;
+    padding:25px;
+    font-size:28px;
+}
 
-        .opt-btn:hover {
-            background: #555;
-        }
-    </style>
+.hero{
+    text-align:center;
+    padding:100px 20px;
+}
+
+.btn{
+    display:inline-block;
+    margin:15px;
+    padding:12px 25px;
+    background:#3b82f6;
+    color:white;
+    text-decoration:none;
+    border-radius:8px;
+}
+</style>
 </head>
 
 <body>
 
-<h1>✈️ Aero Symposium 2K26</h1>
+<canvas id="particles"></canvas>
+<div class="glow g1"></div>
+<div class="glow g2"></div>
 
-<img src="plane.png" id="plane" class="plane">
+<!-- INTRO -->
+<div id="intro">
+    <h1>✈ HOLD TO TAKE OFF</h1>
 
-<div class="runway"></div>
+    <div id="holdBtn">
+        <div id="progress"></div>
+        PRESS & HOLD
+    </div>
 
-<button class="btn"
-        onmousedown="startFly()"
-        ontouchstart="startFly()">
-    Press & Hold to Takeoff 🚀
-</button>
+    <img id="plane" src="https://i.ibb.co/6bQ3XwR/airplane.png">
+</div>
 
-<div class="options" id="options">
-    <button class="opt-btn" onclick="goTech()">💻 Tech Events</button>
-    <button class="opt-btn" onclick="goNonTech()">🎉 Non-Tech Events</button>
+<!-- MAIN -->
+<div id="main">
+    <header>✈️ AERO SYMPOSIUM 2K26</header>
+
+    <div class="hero">
+        <h1>Department of Aeronautical Engineering</h1>
+        <p>Innovate • Design • Fly 🚀</p>
+
+        <a href="technical.html" class="btn">Technical Events</a>
+        <a href="nontechnical.html" class="btn">Non-Tech Events</a>
+    </div>
 </div>
 
 <script>
-function startFly() {
-    document.getElementById("plane").classList.add("fly");
+/* PARTICLES */
+const canvas = document.getElementById("particles");
+const ctx = canvas.getContext("2d");
 
-    setTimeout(() => {
-        document.getElementById("options").style.display = "block";
-    }, 2000);
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let particles = [];
+
+for (let i = 0; i < 120; i++) {
+    particles.push({
+        x: Math.random()*canvas.width,
+        y: Math.random()*canvas.height,
+        r: Math.random()*2,
+        dx: (Math.random()-0.5)*0.5,
+        dy: (Math.random()-0.5)*0.5
+    });
 }
 
-function goTech() {
-    window.location.href = "tech.html";
+function animate(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+
+    particles.forEach(p=>{
+        ctx.beginPath();
+        ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+        ctx.fillStyle="white";
+        ctx.fill();
+
+        p.x+=p.dx;
+        p.y+=p.dy;
+
+        if(p.x<0||p.x>canvas.width) p.dx*=-1;
+        if(p.y<0||p.y>canvas.height) p.dy*=-1;
+    });
+
+    requestAnimationFrame(animate);
+}
+animate();
+
+/* HOLD LOGIC */
+let holdBtn = document.getElementById("holdBtn");
+let progress = document.getElementById("progress");
+let plane = document.getElementById("plane");
+
+let holding = false;
+let width = 0;
+
+holdBtn.onmousedown = startHold;
+holdBtn.onmouseup = stopHold;
+holdBtn.onmouseleave = stopHold;
+
+function startHold(){
+    holding = true;
+
+    let interval = setInterval(()=>{
+        if(!holding){
+            clearInterval(interval);
+            width = 0;
+            progress.style.width = "0%";
+            return;
+        }
+
+        width += 2;
+        progress.style.width = width + "%";
+
+        if(width >= 100){
+            clearInterval(interval);
+            takeoff();
+        }
+    },30);
 }
 
-function goNonTech() {
-    window.location.href = "nontech.html";
+function stopHold(){
+    holding = false;
+}
+
+/* ✈️ TAKEOFF FROM BUTTON */
+function takeoff(){
+    plane.style.display = "block";
+
+    let rect = holdBtn.getBoundingClientRect();
+
+    let x = rect.left + rect.width/2;
+    let y = rect.top;
+
+    plane.style.left = x + "px";
+    plane.style.top = y + "px";
+
+    // 🔙 BACKWARD
+    let back = setInterval(()=>{
+        x -= 3;
+        plane.style.left = x + "px";
+
+        if(x < rect.left - 120){
+            clearInterval(back);
+            forward();
+        }
+    },20);
+
+    function forward(){
+        let speed = 4;
+
+        let fly = setInterval(()=>{
+            x += speed;
+            y -= 1.5;
+            speed += 0.2;
+
+            plane.style.left = x + "px";
+            plane.style.top = y + "px";
+            plane.style.transform = "rotate(-25deg)";
+
+            if(x > window.innerWidth){
+                clearInterval(fly);
+
+                document.getElementById("intro").style.display="none";
+                document.getElementById("main").style.display="block";
+            }
+        },20);
+    }
 }
 </script>
 
