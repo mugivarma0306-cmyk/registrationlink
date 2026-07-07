@@ -11,6 +11,13 @@ body{
     background-size: cover;
     color: white;
     overflow: hidden;
+    <div class="overlay"></div>
+    .overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,0.35);
+    z-index:-1;
+}
 }
 /* HEADER */
 header{
