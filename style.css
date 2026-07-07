@@ -6,13 +6,12 @@
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* BODY BACKGROUND (Enhanced glow) */
 body{
-    background: linear-gradient(rgba(10,20,40,0.85), rgba(10,20,40,0.95)),
-                url("background.jpg") no-repeat center/cover fixed;
-    color:#f1f5f9;
+    background: url("abstract-luxury-gradient-blue-background-smooth-dark-blue-with-black-vignette-studio-banner.jpg") no-repeat center center fixed;
+    background-size: cover;
+    color: white;
+    overflow: hidden;
 }
-
 /* HEADER */
 header{
     text-align:center;
